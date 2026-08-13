@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/inventory.css">
+    <title>Inventory</title>
+</head>
+<body>
+    <%- include("./header.ejs") %>
+    <div id="inventoryContainer">
+        <div>
+            <h1>Product Inventory</h1>
+            <div>
+                <button>New Product</button>
+                <button>New Category</button>
+            </div>
+        </div>
+        <div id="productTable">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Product Name</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% products.map(product => {%>
+                        <tr>
+                            <td><%= product.category_id %></td>
+                            <td><%= product.product_name %></td>
+                            <td><%= product.price %></td>
+                            <td><%= product.quantity %></td>
+                            <td><%= product.description %></td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+    document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] +':35729/livereload.js?snipver=1"></' + 'script>')
+    </script>
+</body>
+</html>
