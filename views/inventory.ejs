@@ -30,11 +30,18 @@
                 <tbody>
                     <% products.map(product => {%>
                         <tr>
-                            <td><%= product.category_id %></td>
-                            <td><%= product.product_name %></td>
-                            <td><%= product.price %></td>
-                            <td><%= product.quantity %></td>
-                            <td><%= product.description %></td>
+                            <form action="/inventory" method="post">
+                                <td><%= product.category_id %></td>
+                                <td><%= product.product_name %></td>
+                                <td>$<input type="number" value="<%= product.price %>" name="price"></td>
+                                <td><input type="number" value="<%= product.quantity %>" name="quantity"></td>
+                                <td>
+                                    <input type="hidden" value="<%= product.id %>" name="id">
+                                    <input type="text" value="<%= product.description %>" name="description">
+                                    <button type="submit" class="formButton" value="save" name="type"><img src="/assets/save.svg" alt="delete icon" class="icon"></button>
+                                    <button type="submit" class="formButton" value="delete" name="type"><img src="/assets/delete.svg" alt="save icon" class="icon"></button>
+                                </td>
+                            </form>
                         </tr>
                     <% }) %>
                 </tbody>
