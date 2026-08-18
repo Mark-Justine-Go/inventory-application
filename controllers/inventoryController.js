@@ -38,8 +38,19 @@ async function modifyProduct(req,res){
     res.render("inventory", {products, categories});
 }
 
+async function addCategory(req, res){
+    const {category} = req.body;
+
+    await db.addCategoryQuery(category);
+
+    const products = await db.getAllProductsQuery();
+    const categories = await db.getCategoriesQuery();
+    res.render("inventory", {products, categories});
+}
+
 module.exports = {
     getProducts,
     modifyProduct,
-    addProduct
+    addProduct,
+    addCategory
 }

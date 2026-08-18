@@ -29,10 +29,17 @@ async function getCategoriesQuery(){
     return rows;
 }
 
+async function addCategoryQuery(category){
+    const query = "INSERT INTO categories (name) VALUES ($1)";
+    const values = [category];
+    await pool.query(query,values);
+}
+
 module.exports = {
     getAllProductsQuery,
     modifyProductQuery,
     removeProductQuery,
     addProductQuery,
     getCategoriesQuery,
+    addCategoryQuery,
 }

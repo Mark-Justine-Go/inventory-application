@@ -42,7 +42,8 @@ select{
     background-color: white;
 }
 
-.modal{
+#productModal,
+#categoryModal{
     position: fixed;
     top: 50%;
     left: 50%;
@@ -54,25 +55,29 @@ select{
     display: none;
 }
 
-.modal > form{
+#productModal > form,
+#categoryModal > form{
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
-.modal button{
+#productModal button,
+#categoryModal button{
     width: 30%;
     padding: 5px;
     align-self: center;
 }
 
-.modal > form > div {
+#productModal > form > div ,
+#categoryModal > form > div{
     display: flex;
     gap: 20px;
     justify-content: space-between;
 }
 
-.modal > form > div > input{
+#productModal > form > div > input,
+#categoryModal form > div > input{
     width: 300px;
 }
 

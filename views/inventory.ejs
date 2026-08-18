@@ -13,8 +13,8 @@
         <div>
             <h1>Product Inventory</h1>
             <div>
-                <button id="modalButton">New Product</button>
-                <button>New Category</button>
+                <button id="productModalButton">New Product</button>
+                <button id="categoryModalButton">New Category</button>
             </div>
         </div>
         <div id="productTable">
@@ -64,7 +64,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="modal">
+        <div id="productModal">
             <form action="/inventory/add" method="post" enctype="multipart/form-data">
                 <h3>Add product</h3>
                 <hr>
@@ -87,6 +87,16 @@
                 <div>
                     <label for="productImage">Product Image</label>
                     <input type="file" name="productImage" accept="image/**" required>
+                </div>
+                <button type="submit">Add</button>
+            </form>
+        </div>
+        <div id="categoryModal">
+            <form action="/inventory/addCategory" method="post">
+                <h3>Add Category</h3>
+                <div>
+                    <label for="category">Category Name</label>
+                    <input type="text" name="category">
                 </div>
                 <button type="submit">Add</button>
             </form>
