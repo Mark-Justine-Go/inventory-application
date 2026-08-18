@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/product.css">
+    <title>Products</title>
+</head>
+<body>
+    <%- include("./header.ejs") %>
+    <div id="container">
+        <% products.map(product => { %>
+            <div class="card">
+                <div>
+                    <img class="thumbnail" src="data: <%= product.mime_type %>;base64,<%= product.image.toString('base64') %>" alt="">
+                </div>
+                <div id="information">
+                    <div>
+                        <p><%= product.product_name %></p>
+                    </div>
+                    <div>
+                        <p>$ <%= product.price %></p>
+                    </div>
+                    <div>
+                        <p><%= product.quantity %> items remaining</p>
+                    </div>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+    <script>
+        document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] +':35729/livereload.js?snipver=1"></' + 'script>')
+    </script>
+</body>
+</html>

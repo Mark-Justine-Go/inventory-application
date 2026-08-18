@@ -1,6 +1,7 @@
 const express = require("express");
 const path = require("node:path");
 const inventoryRouter = require("./routes/inventoryRouter");
+const productsRouter = require("./routes/productsRouter");
 
 const app = express();
 
@@ -31,6 +32,7 @@ app.use(express.static(assetPath));
 
 app.use(express.urlencoded({extended: true}));
 app.use("/inventory", inventoryRouter);
+app.use("/", productsRouter);
 
 app.listen(PORT, (err) => {
     if(err){
