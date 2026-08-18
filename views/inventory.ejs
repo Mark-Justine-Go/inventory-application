@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/inventory.css">
+    <link rel="stylesheet" href="/styles/inventory.css">
+    <script src="/scripts/inventoryScripts.js" defer></script>
     <title>Inventory</title>
 </head>
 <body>
@@ -12,7 +13,7 @@
         <div>
             <h1>Product Inventory</h1>
             <div>
-                <button>New Product</button>
+                <button id="modalButton">New Product</button>
                 <button>New Category</button>
             </div>
         </div>
@@ -21,6 +22,7 @@
                 <thead>
                     <tr>
                         <th>Category</th>
+                        <th>Product Image</th>
                         <th>Product Name</th>
                         <th>Price</th>
                         <th>Quantity</th>
@@ -31,21 +33,63 @@
                     <% products.map(product => {%>
                         <tr>
                             <form action="/inventory" method="post">
-                                <td><%= product.category_id %></td>
+                                <input type="hidden" value="<%= product.id %>" name="id">
+                                <td>
+                                    <select name="category">
+                                        <% categories.map(category => { %>
+                                            <option value="<%= category.id %>" <%= category.id === product.category_id ? 'selected' : '' %> > <%= category.name %> </option>
+                                        <% }) %>
+                                    </select>
+                                    
+                                </td>
+                                <td><img class="thumbnail" src="data: <%= product.mime_type %>;base64,<%= product.image.toString('base64') %>" alt=""></td>
                                 <td><%= product.product_name %></td>
-                                <td>$<input type="number" value="<%= product.price %>" name="price"></td>
+                                <td>
+                                    <div class="center">
+                                        <span>$</span>
+                                        <input type="number" value="<%= product.price %>" name="price">
+                                    </div>
+                                </td>
                                 <td><input type="number" value="<%= product.quantity %>" name="quantity"></td>
                                 <td>
-                                    <input type="hidden" value="<%= product.id %>" name="id">
-                                    <input type="text" value="<%= product.description %>" name="description">
-                                    <button type="submit" class="formButton" value="save" name="type"><img src="/assets/save.svg" alt="delete icon" class="icon"></button>
-                                    <button type="submit" class="formButton" value="delete" name="type"><img src="/assets/delete.svg" alt="save icon" class="icon"></button>
+                                    <div class="center">
+                                        <input type="text" value="<%= product.description %>" name="description">
+                                        <button type="submit" class="formButton" value="save" name="type"><img src="/assets/save.svg" alt="delete icon" class="icon"></button>
+                                        <button type="submit" class="formButton" value="delete" name="type"><img src="/assets/delete.svg" alt="save icon" class="icon"></button>
+                                    </div>
                                 </td>
                             </form>
                         </tr>
                     <% }) %>
                 </tbody>
             </table>
+        </div>
+        <div class="modal">
+            <form action="/inventory/add" method="post" enctype="multipart/form-data">
+                <h3>Add product</h3>
+                <hr>
+                <div>
+                    <label for="productName">Product Name</label>
+                    <input type="text" name="productName" required>
+                </div>
+                <div>
+                    <label for="price">Price</label>
+                    <input type="number" name="price" required>
+                </div>
+                <div>
+                    <label for="quantity">Quantity</label>
+                    <input type="text" name="quantity" required>
+                </div>
+                <div>
+                    <label for="description">Description</label>
+                    <input type="text" name="description" required>
+                </div>
+                <div>
+                    <label for="productImage">Product Image</label>
+                    <input type="file" name="productImage" accept="image/**" required>
+                </div>
+                <button type="submit">Add</button>
+            </form>
         </div>
     </div>
     <script>
