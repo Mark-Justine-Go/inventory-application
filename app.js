@@ -6,23 +6,6 @@ const productsRouter = require("./routes/productsRouter");
 const app = express();
 
 
-//live reload
-const livereload = require('livereload');
-
-const liveReloadServer = livereload.createServer();
-liveReloadServer.watch([
-  path.join(__dirname, 'public'),
-  path.join(__dirname, 'views')
-]);
-
-liveReloadServer.server.once("connection", () => {
-  setTimeout(() => {
-    liveReloadServer.refresh("/");
-  }, 100);
-});
-//----------------------------------------------
-
-
 const PORT = 3000;
 const assetPath = path.join(__dirname, "public");
 
